@@ -1,4 +1,4 @@
-package exception;
+package com.beerapp.exception;
 
 public class BeerException extends Exception {
 

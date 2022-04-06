@@ -1,9 +1,9 @@
-package validator;
+package com.beerapp.validator;
 
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
-import request.EditBeerRatingRequest;
+import com.beerapp.request.EditBeerRatingRequest;
 
 public class EditBeerRatingRequestValidator implements Validator {
     @Override

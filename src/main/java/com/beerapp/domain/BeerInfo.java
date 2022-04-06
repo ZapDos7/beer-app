@@ -1,5 +1,6 @@
-package domain;
+package com.beerapp.domain;
 
+import com.beerapp.domain.enums.BeerType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
@@ -15,4 +16,5 @@ public class BeerInfo {
     private String countryOfOrigin;
     private String description;
     private Integer rating;
+    private BeerType beerType;
 }

@@ -1,4 +1,4 @@
-package request;
+package com.beerapp.request;
 
 import lombok.Getter;
 import lombok.Setter;

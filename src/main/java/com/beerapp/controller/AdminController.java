@@ -1,19 +1,19 @@
-package controller;
+package com.beerapp.controller;
 
 import javax.validation.constraints.NotNull;
 
-import exception.BeerException;
+import com.beerapp.exception.BeerException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
-import request.AddBeerRequest;
-import request.EditBeerRatingRequest;
-import resource.BeerInfoResource;
-import service.BeerInfoService;
-import validator.AddBeerRequestValidator;
-import validator.EditBeerRatingRequestValidator;
+import com.beerapp.request.AddBeerRequest;
+import com.beerapp.request.EditBeerRatingRequest;
+import com.beerapp.resource.BeerInfoResource;
+import com.beerapp.service.BeerInfoService;
+import com.beerapp.validator.AddBeerRequestValidator;
+import com.beerapp.validator.EditBeerRatingRequestValidator;
 
 import java.util.UUID;
 
@@ -23,13 +23,18 @@ public class AdminController {
     @Autowired
     BeerInfoService beerInfoService;
 
-    @InitBinder
-    public void initBinder(WebDataBinder binder) {
-        if (binder.getTarget() instanceof AddBeerRequest || binder.getTarget() instanceof EditBeerRatingRequest) {
+    @InitBinder(value = "add")
+    public void initAddBinder(WebDataBinder binder) {
+        if (binder.getTarget() instanceof AddBeerRequest) {
             binder.addValidators(new AddBeerRequestValidator());
+        }
+    }
+
+    @InitBinder(value = "rate")
+    public void initRateBinder(WebDataBinder binder) {
+        if (binder.getTarget() instanceof EditBeerRatingRequest) {
             binder.addValidators(new EditBeerRatingRequestValidator());
         }
-
     }
 
     @DeleteMapping(value = "/{id}")
@@ -39,7 +44,7 @@ public class AdminController {
 
     @PostMapping
     public BeerInfoResource addBeer(@RequestBody @Validated @NotNull AddBeerRequest body) {
-        return new BeerInfoResource(beerInfoService.addBeer(body.getName(), body.getCountry(), body.getDescription()));
+        return new BeerInfoResource(beerInfoService.addBeer(body.getName(), body.getCountry(), body.getDescription(), body.getBeerType()));
     }
 
     @PutMapping(value = "/{id}")

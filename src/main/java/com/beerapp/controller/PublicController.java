@@ -1,14 +1,14 @@
-package controller;
+package com.beerapp.controller;
 
-import domain.BeerInfo;
-import exception.BeerException;
+import com.beerapp.domain.enums.BeerType;
+import com.beerapp.exception.BeerException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
-import resource.BeerInfoResource;
-import service.BeerInfoService;
+import com.beerapp.resource.BeerInfoResource;
+import com.beerapp.service.BeerInfoService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,10 +23,11 @@ public class PublicController {
     @GetMapping
     public List<BeerInfoResource> getAllBeers(
             @RequestParam(required = false, name= "country") String country,
-            @RequestParam(required = false, name= "rating") Integer rating
+            @RequestParam(required = false, name= "rating") Integer rating,
+            @RequestParam(required = false, name= "beerType") BeerType beerType
     ) {
         List<BeerInfoResource> beers = new ArrayList<>();
-        beerInfoService.getByCriteria(country,rating).forEach(beerInfo -> beers.add(new BeerInfoResource(beerInfo)));
+        beerInfoService.getByCriteria(country,rating, beerType).forEach(beerInfo -> beers.add(new BeerInfoResource(beerInfo)));
         return beers;
     }
 
