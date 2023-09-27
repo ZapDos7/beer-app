@@ -1,0 +1,5 @@
+--INSERT INTO `users`(`id`, name`, `email`, `password`) VALUES(UUID_TO_BIN(), 'admin', 'admin@beer.com', 'admin'); -- TODO security
+--INSERT INTO `users`(`id`, name`, `email`, `password`) VALUES(UUID_TO_BIN(), 'user1', 'user1@beer.com', 'ILikeBeers123');
+--
+--INSERT INTO `beer`(`id`, `name`, `country_of_origin`, `description`, `type`)
+--VALUES(UUID_TO_BIN(), 'Mamos Beer', 'Greece', 'Beer with a special hop aroma, rich foam and full-bodied taste', 'PILSNER');

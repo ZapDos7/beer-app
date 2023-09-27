@@ -1,0 +1,14 @@
+com\beerapp\web\validator\AddBeerRequestValidator.class
+com\beerapp\web\validator\EditBeerRatingRequestValidator.class
+com\beerapp\web\resource\BeerInfoResource.class
+com\beerapp\domain\Rating$RatingId.class
+com\beerapp\domain\exception\BeerException.class
+com\beerapp\domain\repository\UserRepository.class
+com\beerapp\web\request\AddBeerRequest.class
+com\beerapp\domain\repository\RatingRepository.class
+com\beerapp\domain\dto\BeerRatingDto.class
+com\beerapp\web\controller\PublicController.class
+com\beerapp\service\translator\BeerInfoTranslator.class
+com\beerapp\web\controller\AdminController.class
+com\beerapp\web\request\EditBeerRatingRequest.class
+com\beerapp\domain\repository\BeerInfoRepository.class

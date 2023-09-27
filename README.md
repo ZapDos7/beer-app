@@ -7,6 +7,11 @@ A simple Spring Boot app which displays a list of beers, information about them 
 2. Run the application `mvn spring-boot:run` 
 3. Open your favourite browser & navigate to: `http://localhost:8080/`
 
+### To Dos
+ - [ ] Introduce [security](https://www.baeldung.com/registration-with-spring-mvc-and-spring-security) or [security](https://www.toptal.com/java/rest-security-with-jwt-spring-security-and-java)
+ - [ ] Implement FE
+ - [ ] Expand beer entity to include date it was created, history of the beer, website for more info?
+
 ### License
 [MIT](https://opensource.org/licenses/MIT)
 
