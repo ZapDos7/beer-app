@@ -1,5 +1,6 @@
 package com.beerapp.web.resource;
 
+import com.beerapp.domain.Beer;
 import com.beerapp.domain.enums.BeerType;
 
 import java.time.Instant;
@@ -15,6 +16,16 @@ public class BeerResource {
     private String moreInfo;
 
     public BeerResource() {
+    }
+
+    public BeerResource(Beer beer) {
+        this.id = beer.getId();
+        this.name = beer.getName();
+        this.countryOfOrigin = beer.getCountryOfOrigin();
+        this.description = beer.getDescription();
+        this.type = beer.getType();
+        this.dateCreated = beer.getDateCreated();
+        this.moreInfo = beer.getMoreInfo();
     }
 
     public UUID getId() {

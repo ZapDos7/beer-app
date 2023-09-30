@@ -28,6 +28,8 @@ A simple Spring Boot app which displays a list of beers, information about them 
 4. View all users
 5. Delete a user
 
+[Postman collection](https://github.com/ZapDos7/beer-app/blob/feature/reboot/src/main/resources/postman.json)
+
 ### DB Schema
 
 ![DB Schema](https://github.com/ZapDos7/beer-app/blob/feature/reboot/src/main/resources/schema.png "DB Schema")

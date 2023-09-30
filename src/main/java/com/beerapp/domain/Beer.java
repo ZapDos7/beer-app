@@ -1,6 +1,8 @@
 package com.beerapp.domain;
 
 import com.beerapp.domain.enums.BeerType;
+import com.beerapp.web.request.AddBeerRequest;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.time.Instant;
@@ -10,6 +12,8 @@ import java.util.UUID;
 @Table(name = "beer")
 public class Beer {
     @Id
+    @GeneratedValue(generator = "uuid-hibernate-generator")
+    @GenericGenerator(name = "uuid-hibernate-generator", strategy = "org.hibernate.id.UUIDGenerator")
     @Column(name = "id", unique = true)
     private UUID id;
     @Column(name = "name")
@@ -27,6 +31,15 @@ public class Beer {
     private String moreInfo;
 
     public Beer() {
+    }
+
+    public Beer(AddBeerRequest request) {
+        this.name = request.getName();
+        this.countryOfOrigin = request.getCountryOfOrigin();
+        this.description = request.getDescription();
+        this.type = request.getType();
+        this.dateCreated = Instant.now();
+        this.moreInfo = request.getMoreInfo();
     }
 
     public UUID getId() {

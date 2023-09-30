@@ -1,5 +1,7 @@
 package com.beerapp.web.resource;
 
+import com.beerapp.domain.Rating;
+
 import java.time.Instant;
 import java.util.UUID;
 
@@ -11,6 +13,13 @@ public class BeerRatingResource {
     private Instant ratingDate;
 
     public BeerRatingResource() {
+    }
+
+    public BeerRatingResource(Rating rating) {
+        this.beerId = rating.getBeerId();
+        this.userId = rating.getUserId();
+        this.rating = rating.getRating();
+        this.ratingDate = rating.getRatingDate();
     }
 
     public UUID getBeerId() {

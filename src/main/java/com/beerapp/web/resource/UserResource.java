@@ -1,5 +1,6 @@
 package com.beerapp.web.resource;
 
+import com.beerapp.domain.User;
 import com.beerapp.domain.enums.Role;
 
 import java.time.Instant;
@@ -14,6 +15,15 @@ public class UserResource {
     private Instant signUpDate;
 
     public UserResource() {
+    }
+
+    public UserResource(User user) {
+        this.id = user.getId();
+        this.name = user.getName();
+        this.email = user.getEmail();
+        this.password = user.getPassword();
+        this.role = user.getRole();
+        this.signUpDate = user.getSignUpDate();
     }
 
     public UUID getId() {
