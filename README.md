@@ -18,8 +18,9 @@ A simple Spring Boot app which displays a list of beers, information about them 
 2. View a beer's details
 
 #### User Controller (require log in)
-1. Add/Edit rating to beer
-2. Delete rating of beer
+1. View all user's ratings
+2. Add/Edit rating to beer
+3. Delete rating of beer
 
 #### Admin Controller (require log in & admin rights)
 1. Add a new beer
