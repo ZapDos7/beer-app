@@ -1,6 +1,6 @@
 package com.beerapp.web.controller;
 
-import com.beerapp.domain.User;
+import com.beerapp.web.resource.UserResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,7 +13,7 @@ import java.util.UUID;
 public class AdminUserController {
 
     @GetMapping
-    public List<User> getUsers() {
+    public List<UserResource> getUsers() {
         return new ArrayList<>();
     }
 

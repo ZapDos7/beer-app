@@ -1,7 +1,7 @@
 package com.beerapp.web.controller;
 
-import com.beerapp.domain.Beer;
 import com.beerapp.domain.enums.BeerType;
+import com.beerapp.web.resource.BeerResource;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -13,7 +13,7 @@ import java.util.UUID;
 public class PublicController {
 
     @GetMapping
-    public List<Beer> getAllBeers(
+    public List<BeerResource> getAllBeers(
             @RequestParam(required = false) String country,
             @RequestParam(required = false) Integer rating,
             @RequestParam(required = false) BeerType type) {
@@ -21,8 +21,8 @@ public class PublicController {
     }
 
     @GetMapping("/{id}")
-    public Beer getBeerDetails(
+    public BeerResource getBeerDetails(
             @PathVariable(name = "id") UUID beerId) {
-        return new Beer();
+        return new BeerResource();
     }
 }
