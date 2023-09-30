@@ -1,0 +1,10 @@
+com/beerapp/service/RatingService.class
+com/beerapp/web/resource/BeerRatingResource.class
+com/beerapp/service/BeerService.class
+com/beerapp/domain/repository/RatingRepository.class
+com/beerapp/domain/repository/BeerRepository.class
+com/beerapp/domain/repository/UserRepository.class
+com/beerapp/web/resource/UserResource.class
+com/beerapp/web/resource/BeerResource.class
+com/beerapp/service/UserService.class
+com/beerapp/exceptions/BeerException.class

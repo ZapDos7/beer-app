@@ -7,6 +7,33 @@ A simple Spring Boot app which displays a list of beers, information about them 
 2. Run the application `mvn spring-boot:run` 
 3. Open your favourite browser & navigate to: `http://localhost:8080/`
 
+### To Dos
+ - [ ] Introduce [security](https://www.baeldung.com/registration-with-spring-mvc-and-spring-security) or [security](https://www.toptal.com/java/rest-security-with-jwt-spring-security-and-java)
+ - [ ] Implement FE
+
+### API Definition
+
+#### Public Controller (do not require log in)
+1. View all beers
+2. View a beer's details
+
+#### User Controller (require log in)
+1. Add/Edit rating to beer
+2. Delete rating of beer
+
+#### Admin Controller (require log in & admin rights)
+1. Add a new beer
+2. Edit an existing beer's info
+3. Delete a beer
+4. View all users
+5. Delete a user
+
+[Postman collection](https://github.com/ZapDos7/beer-app/blob/feature/reboot/src/main/resources/postman.json)
+
+### DB Schema
+
+![DB Schema](https://github.com/ZapDos7/beer-app/blob/feature/reboot/src/main/resources/schema.png "DB Schema")
+
 ### License
 [MIT](https://opensource.org/licenses/MIT)
 
