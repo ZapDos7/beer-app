@@ -1,40 +1,15 @@
-package com.beerapp.domain;
+package com.beerapp.web.request;
 
 import com.beerapp.domain.enums.BeerType;
 
-import javax.persistence.*;
-import java.time.Instant;
-import java.util.UUID;
-
-@Entity
-@Table(name = "beer")
-public class Beer {
-    @Id
-    @Column(name = "id", unique = true)
-    private UUID id;
-    @Column(name = "name")
+public class AddBeerRequest {
     private String name;
-    @Column(name = "country_of_origin")
     private String countryOfOrigin;
-    @Column(name = "description")
     private String description;
-    @Column(name = "type") //('ALE', 'LAGER', 'PORTER', 'STOUT', 'BLONDE_ALE', 'BROWN_ALE', 'PALE_ALE', 'IPA', 'WHEAT', 'PILSNER', 'SOUR_ALE') NOT NULL,
-    @Enumerated(EnumType.STRING)
     private BeerType type;
-    @Column(name = "date_created")
-    private Instant dateCreated;
-    @Column(name = "more_info")
     private String moreInfo;
 
-    public Beer() {
-    }
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
+    public AddBeerRequest() {
     }
 
     public String getName() {
@@ -67,14 +42,6 @@ public class Beer {
 
     public void setType(BeerType type) {
         this.type = type;
-    }
-
-    public Instant getDateCreated() {
-        return dateCreated;
-    }
-
-    public void setDateCreated(Instant dateCreated) {
-        this.dateCreated = dateCreated;
     }
 
     public String getMoreInfo() {

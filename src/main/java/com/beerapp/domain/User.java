@@ -2,10 +2,7 @@ package com.beerapp.domain;
 
 import com.beerapp.domain.enums.Role;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.Instant;
 import java.util.UUID;
 
@@ -22,6 +19,7 @@ public class User {
     @Column(name = "password")
     private String password;
     @Column(name = "role")
+    @Enumerated(EnumType.STRING)
     private Role role;
     @Column(name = "sign_up_date")
     private Instant signUpDate;
