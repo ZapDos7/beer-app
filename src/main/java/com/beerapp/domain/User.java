@@ -1,79 +1,79 @@
 package com.beerapp.domain;
 
-import com.beerapp.domain.enums.UserRole;
+import com.beerapp.domain.enums.Role;
 
-import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.time.Instant;
+import java.util.UUID;
 
 @Entity
 @Table(name = "users")
 public class User {
-  @Id
-  @Column(name = "id")
-  private UUID id;
+    @Id
+    @Column(name = "id", unique = true)
+    private UUID id;
+    @Column(name = "name")
+    private String name;
+    @Column(name = "email", unique = true)
+    private String email;
+    @Column(name = "password")
+    private String password;
+    @Column(name = "role")
+    private Role role;
+    @Column(name = "sign_up_date")
+    private Instant signUpDate;
 
-  @Column(name = "name")
-  private String name;
+    public User() {
+    }
 
-  @Column(name = "email")
-  private String email;
+    public UUID getId() {
+        return id;
+    }
 
-  @Column(name = "password")
-  private String password;
+    public void setId(UUID id) {
+        this.id = id;
+    }
 
-  @Column(name = "role")
-  private UserRole role;
+    public String getName() {
+        return name;
+    }
 
-  public User(String name, String email, String password, UserRole role) {
-    this.name = name;
-    this.email = email;
-    this.password = password;
-    this.role = role;
-  }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-  public User() {
-  }
+    public String getEmail() {
+        return email;
+    }
 
-  public UUID getId() {
-    return id;
-  }
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-  public void setId(UUID id) {
-    this.id = id;
-  }
+    public String getPassword() {
+        return password;
+    }
 
-  public String getName() {
-    return name;
-  }
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-  public void setName(String name) {
-    this.name = name;
-  }
+    public Role getRole() {
+        return role;
+    }
 
-  public String getEmail() {
-    return email;
-  }
+    public void setRole(Role role) {
+        this.role = role;
+    }
 
-  public void setEmail(String email) {
-    this.email = email;
-  }
+    public Instant getSignUpDate() {
+        return signUpDate;
+    }
 
-  public String getPassword() {
-    return password;
-  }
-
-  public void setPassword(String password) {
-    this.password = password;
-  }
-
-  public UserRole getRole() {
-    return role;
-  }
-
-  public void setRole(UserRole role) {
-    this.role = role;
-  }
+    public void setSignUpDate(Instant signUpDate) {
+        this.signUpDate = signUpDate;
+    }
 }

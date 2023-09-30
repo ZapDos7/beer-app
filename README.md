@@ -10,7 +10,29 @@ A simple Spring Boot app which displays a list of beers, information about them 
 ### To Dos
  - [ ] Introduce [security](https://www.baeldung.com/registration-with-spring-mvc-and-spring-security) or [security](https://www.toptal.com/java/rest-security-with-jwt-spring-security-and-java)
  - [ ] Implement FE
- - [ ] Expand beer entity to include date it was created, history of the beer, website for more info?
+
+### API Definition
+
+#### Public Controller (do not require log in)
+1. View all beers
+2. View a beer's details
+
+#### User Controller (require log in)
+1. Add rating to beer
+2. Edit rating of beer
+3. Delete rating of beer
+
+#### Admin Controller (require log in & admin rights)
+1. Add a new beer
+2. Edit an existing beer's info
+3. Delete a beer
+4. Purge all beers
+5. View all users
+6(in time) Delete a user
+
+### DB Schema
+
+![DB Schema](https://github.com/ZapDos7/beer-app/src/main/resources/schema.png "DB Schema")
 
 ### License
 [MIT](https://opensource.org/licenses/MIT)

@@ -1,19 +1,16 @@
 package com.beerapp.domain;
 
 import com.beerapp.domain.enums.BeerType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.Id;
-import javax.persistence.Table;
+
+import javax.persistence.*;
+import java.time.Instant;
 import java.util.UUID;
 
 @Entity
 @Table(name = "beer")
-public class BeerInfo {
+public class Beer {
     @Id
-    @Column(name = "id")
+    @Column(name = "id", unique = true)
     private UUID id;
     @Column(name = "name")
     private String name;
@@ -21,19 +18,15 @@ public class BeerInfo {
     private String countryOfOrigin;
     @Column(name = "description")
     private String description;
-    @Enumerated(EnumType.STRING)
-    @Column(name = "type")
+    @Column(name = "type") //('ALE', 'LAGER', 'PORTER', 'STOUT', 'BLONDE_ALE', 'BROWN_ALE', 'PALE_ALE', 'IPA', 'WHEAT', 'PILSNER', 'SOUR_ALE') NOT NULL,
+    @Enumerated(EnumType.ORDINAL)
     private BeerType type;
+    @Column(name = "date_created")
+    private Instant dateCreated;
+    @Column(name = "more_info")
+    private String moreInfo;
 
-    public BeerInfo(UUID id, String name, String countryOfOrigin, String description, BeerType beerType) {
-        this.id = id;
-        this.name = name;
-        this.countryOfOrigin = countryOfOrigin;
-        this.description = description;
-        this.type = beerType;
-    }
-
-    public BeerInfo() {
+    public Beer() {
     }
 
     public UUID getId() {
@@ -68,11 +61,27 @@ public class BeerInfo {
         this.description = description;
     }
 
-    public BeerType getBeerType() {
+    public BeerType getType() {
         return type;
     }
 
-    public void setBeerType(BeerType beerType) {
-        this.type = beerType;
+    public void setType(BeerType type) {
+        this.type = type;
+    }
+
+    public Instant getDateCreated() {
+        return dateCreated;
+    }
+
+    public void setDateCreated(Instant dateCreated) {
+        this.dateCreated = dateCreated;
+    }
+
+    public String getMoreInfo() {
+        return moreInfo;
+    }
+
+    public void setMoreInfo(String moreInfo) {
+        this.moreInfo = moreInfo;
     }
 }
