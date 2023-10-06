@@ -7,6 +7,7 @@ import com.beerapp.web.resource.BeerRatingResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.UUID;
 
@@ -31,7 +32,7 @@ public class UserController {
     public BeerRatingResource rate(
             @PathVariable(name = "userId") UUID userId,
             @PathVariable(name = "beerId") UUID beerId,
-            @RequestBody /* TODO Validate */ EditRatingRequest request) throws BeerException {
+            @RequestBody @Valid EditRatingRequest request) throws BeerException {
         return new BeerRatingResource(ratingService.rate(userId, beerId, request));
     }
 
