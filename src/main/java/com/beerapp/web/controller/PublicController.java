@@ -3,11 +3,14 @@ package com.beerapp.web.controller;
 import com.beerapp.domain.enums.BeerType;
 import com.beerapp.service.BeerService;
 import com.beerapp.web.resource.BeerResource;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
 
+@Tag(name = "Beers", description = "View beers")
 @RestController
 @RequestMapping("/public")
 public class PublicController {
@@ -18,6 +21,7 @@ public class PublicController {
         this.beerService = beerService;
     }
 
+    @Operation(summary = "Public: See all available beers")
     @GetMapping
     public List<BeerResource> getAllBeers(
             @RequestParam(required = false) String country,
@@ -25,6 +29,7 @@ public class PublicController {
         return beerService.getBeers(country, type).stream().map(BeerResource::new).toList();
     }
 
+    @Operation(summary = "Public: See an available beer's details")
     @GetMapping("/{id}")
     public BeerResource getBeerDetails(
             @PathVariable(name = "id") UUID beerId) {
