@@ -1,0 +1,17 @@
+meta {
+  name: Edit a beer details
+  type: http
+  seq: 2
+}
+
+patch {
+  url: http://localhost:8080/admin/beers/{id}
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "name": "new name 2"
+  }
+}

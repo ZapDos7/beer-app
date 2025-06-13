@@ -1,0 +1,16 @@
+meta {
+  name: Get All Beers
+  type: http
+  seq: 1
+}
+
+get {
+  url: http://localhost:8080/public
+  body: none
+  auth: none
+}
+
+params:query {
+  ~country: Greece
+  ~type: ALE
+}

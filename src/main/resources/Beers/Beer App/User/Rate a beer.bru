@@ -1,0 +1,17 @@
+meta {
+  name: Rate a beer
+  type: http
+  seq: 2
+}
+
+put {
+  url: http://localhost:8080/user/{userId}/rate/{beerId}
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+      "newRating" : 4
+  }
+}
