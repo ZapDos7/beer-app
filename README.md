@@ -12,7 +12,30 @@ A simple Spring Boot app which displays a list of beers, information about them 
     2. Explore the interactive API documentation via [Swagger](http://localhost:8080/swagger-ui.html) for more info.
     3. Check the application's health status using the [Actuator health check endpoint](http://localhost:8080/actuator/health)
 
-### To Dos
+## API Definition
+
+### Public Endpoints (do not require log in)
+1. View all beers
+2. View a beer's details
+
+### User Endpoints (require log in)
+1. View all user's ratings
+2. Add/Edit rating to beer
+3. Delete rating of beer
+4. View account info
+
+### Admin Endpoints (require log in & admin rights)
+1. Add a new beer
+2. Edit an existing beer's info
+3. Delete a beer
+4. View all users
+5. Delete a user
+
+## DB Schema
+
+![DB Schema](https://github.com/ZapDos7/beer-app/blob/feature/reboot/src/main/resources/schema.png "DB Schema")
+
+## To Dos
 - [x] Introduce get user details endpoint (for users)
 - [ ] Add user: send ticket to support
 - [ ] Add user: edit info
@@ -25,28 +48,7 @@ A simple Spring Boot app which displays a list of beers, information about them 
 - [ ] Introduce docker
 - [ ] Implement FE
 
-### API Definition
 
-#### Public Endpoints (do not require log in)
-1. View all beers
-2. View a beer's details
-
-#### User Endpoints (require log in)
-1. View all user's ratings
-2. Add/Edit rating to beer
-3. Delete rating of beer
-4. View account info
-
-#### Admin Endpoints (require log in & admin rights)
-1. Add a new beer
-2. Edit an existing beer's info
-3. Delete a beer
-4. View all users
-5. Delete a user
-
-### DB Schema
-
-![DB Schema](https://github.com/ZapDos7/beer-app/blob/feature/reboot/src/main/resources/schema.png "DB Schema")
 
 ### Support
 For comments, ideas, issues or general talks about this project, feel free to [open an issue](https://github.com/ZapDos7/beer-app/issues/new/choose). 
