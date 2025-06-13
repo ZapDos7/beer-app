@@ -1,56 +1,57 @@
 package com.beerapp.web.request;
 
 import com.beerapp.domain.enums.BeerType;
+import jakarta.validation.constraints.NotBlank;
 
 import java.util.Optional;
 
 public class EditBeerRequest {
-    private Optional<String> name;
-    private Optional<String> countryOfOrigin;
-    private Optional<String> description;
-    private Optional<BeerType> type;
-    private Optional<String> moreInfo;
+    private String name;
+    private String countryOfOrigin;
+    private String description;
+    private String type;
+    private String moreInfo;
 
     public EditBeerRequest() {
     }
 
-    public Optional<String> getName() {
+    public String getName() {
         return name;
     }
 
-    public void setName(Optional<String> name) {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public Optional<String> getCountryOfOrigin() {
+    public String getCountryOfOrigin() {
         return countryOfOrigin;
     }
 
-    public void setCountryOfOrigin(Optional<String> countryOfOrigin) {
+    public void setCountryOfOrigin(String countryOfOrigin) {
         this.countryOfOrigin = countryOfOrigin;
     }
 
-    public Optional<String> getDescription() {
+    public String getDescription() {
         return description;
     }
 
-    public void setDescription(Optional<String> description) {
+    public void setDescription(String description) {
         this.description = description;
     }
 
-    public Optional<BeerType> getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(Optional<BeerType> type) {
+    public void setType(String type) {
         this.type = type;
     }
 
-    public Optional<String> getMoreInfo() {
+    public String getMoreInfo() {
         return moreInfo;
     }
 
-    public void setMoreInfo(Optional<String> moreInfo) {
+    public void setMoreInfo(String moreInfo) {
         this.moreInfo = moreInfo;
     }
 }

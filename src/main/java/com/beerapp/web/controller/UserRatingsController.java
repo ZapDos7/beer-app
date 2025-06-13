@@ -1,15 +1,15 @@
 package com.beerapp.web.controller;
 
+import com.beerapp.domain.Rating;
 import com.beerapp.exceptions.BeerException;
 import com.beerapp.service.RatingService;
 import com.beerapp.web.request.EditRatingRequest;
-import com.beerapp.web.resource.BeerRatingResource;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.http.HttpStatus;
+import jakarta.validation.Valid;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import jakarta.validation.Valid;
 import java.util.List;
 import java.util.UUID;
 
@@ -26,27 +26,30 @@ public class UserRatingsController {
 
     @Operation(summary = "Get all ratings of a user")
     @GetMapping
-    public List<BeerRatingResource> viewUserRatings(
+    public ResponseEntity<List<Rating>> viewUserRatings(
             @PathVariable(name = "userId") UUID userId) {
-        return ratingService.getAllUserRatings(userId).stream().map(BeerRatingResource::new).toList();
+        return ResponseEntity.ok(ratingService.getAllUserRatings(userId));
     }
 
     @Operation(summary = "Edit a rating of a user")
     @PutMapping("/{beerId}")
-    @ResponseStatus(HttpStatus.OK)
-    public BeerRatingResource rate(
+    public ResponseEntity<Rating> rate(
             @PathVariable(name = "userId") UUID userId,
             @PathVariable(name = "beerId") UUID beerId,
-            @RequestBody @Valid EditRatingRequest request) throws BeerException {
-        return new BeerRatingResource(ratingService.rate(userId, beerId, request));
+            @RequestBody @Valid EditRatingRequest request) {
+        try {
+            return ResponseEntity.ok((ratingService.rate(userId, beerId, request)));
+        } catch (BeerException e) {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @Operation(summary = "Delete a rating of a user")
     @DeleteMapping("/{beerId}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteARating(
+    public ResponseEntity<Void> deleteARating(
             @PathVariable(name = "userId") UUID userId,
             @PathVariable(name = "beerId") UUID beerId) {
         ratingService.deleteRating(userId, beerId);
+        return ResponseEntity.noContent().build();
     }
 }

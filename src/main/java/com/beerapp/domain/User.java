@@ -3,6 +3,8 @@ package com.beerapp.domain;
 import com.beerapp.domain.enums.Role;
 
 import jakarta.persistence.*;
+import org.springframework.data.annotation.CreatedDate;
+
 import java.time.Instant;
 import java.util.UUID;
 
@@ -10,7 +12,8 @@ import java.util.UUID;
 @Table(name = "users")
 public class User {
     @Id
-    @Column(name = "id", unique = true)
+    @GeneratedValue(generator = "uuid-hibernate-generator")
+    @Column(name = "id", unique = true, nullable = false)
     private UUID id;
     @Column(name = "name")
     private String name;
@@ -22,9 +25,14 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Role role;
     @Column(name = "sign_up_date")
+    @CreatedDate
     private Instant signUpDate;
 
-    public User() {
+    public User(String name, String email) {
+        this.name = name;
+        this.email = email;
+        this.role = Role.USER;
+        this.signUpDate = Instant.now();
     }
 
     public UUID getId() {

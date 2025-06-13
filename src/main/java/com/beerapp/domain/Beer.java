@@ -2,9 +2,9 @@ package com.beerapp.domain;
 
 import com.beerapp.domain.enums.BeerType;
 import com.beerapp.web.request.AddBeerRequest;
-import org.hibernate.annotations.GenericGenerator;
-
 import jakarta.persistence.*;
+import org.springframework.data.annotation.CreatedDate;
+
 import java.time.Instant;
 import java.util.UUID;
 
@@ -13,8 +13,7 @@ import java.util.UUID;
 public class Beer {
     @Id
     @GeneratedValue(generator = "uuid-hibernate-generator")
-    @GenericGenerator(name = "uuid-hibernate-generator", strategy = "org.hibernate.id.UUIDGenerator")
-    @Column(name = "id", unique = true)
+    @Column(name = "id", unique = true, nullable = false)
     private UUID id;
     @Column(name = "name")
     private String name;
@@ -26,6 +25,7 @@ public class Beer {
     @Enumerated(EnumType.STRING)
     private BeerType type;
     @Column(name = "date_created")
+    @CreatedDate
     private Instant dateCreated;
     @Column(name = "more_info")
     private String moreInfo;

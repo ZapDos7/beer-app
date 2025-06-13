@@ -1,6 +1,8 @@
 package com.beerapp.domain;
 
 import jakarta.persistence.*;
+import org.springframework.data.annotation.CreatedDate;
+
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.Objects;
@@ -61,6 +63,7 @@ public class Rating {
     @Column(name = "rating")
     private int rating;
     @Column(name = "rating_date")
+    @CreatedDate
     private Instant ratingDate;
 
     public Rating() {
