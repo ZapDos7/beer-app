@@ -4,6 +4,8 @@ import com.beerapp.exceptions.BeerException;
 import com.beerapp.service.RatingService;
 import com.beerapp.web.request.EditRatingRequest;
 import com.beerapp.web.resource.BeerRatingResource;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,6 +13,7 @@ import jakarta.validation.Valid;
 import java.util.List;
 import java.util.UUID;
 
+@Tag(name = "Ratings", description = "Manage user's ratings")
 @RestController
 @RequestMapping("/user/{userId}/rate/")
 public class UserRatingsController {
@@ -21,12 +24,14 @@ public class UserRatingsController {
         this.ratingService = ratingService;
     }
 
+    @Operation(summary = "Get all ratings of a user")
     @GetMapping
     public List<BeerRatingResource> viewUserRatings(
             @PathVariable(name = "userId") UUID userId) {
         return ratingService.getAllUserRatings(userId).stream().map(BeerRatingResource::new).toList();
     }
 
+    @Operation(summary = "Edit a rating of a user")
     @PutMapping("/{beerId}")
     @ResponseStatus(HttpStatus.OK)
     public BeerRatingResource rate(
@@ -36,6 +41,7 @@ public class UserRatingsController {
         return new BeerRatingResource(ratingService.rate(userId, beerId, request));
     }
 
+    @Operation(summary = "Delete a rating of a user")
     @DeleteMapping("/{beerId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteARating(
