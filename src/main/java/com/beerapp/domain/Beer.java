@@ -4,7 +4,7 @@ import com.beerapp.domain.enums.BeerType;
 import com.beerapp.web.request.AddBeerRequest;
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.time.Instant;
 import java.util.UUID;
 

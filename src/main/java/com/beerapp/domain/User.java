@@ -2,7 +2,7 @@ package com.beerapp.domain;
 
 import com.beerapp.domain.enums.Role;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.time.Instant;
 import java.util.UUID;
 

@@ -8,7 +8,10 @@ A simple Spring Boot app which displays a list of beers, information about them 
 3. Open your favourite browser & navigate to: `http://localhost:8080/`
 
 ### To Dos
+ - [ ] Introduce get user details endpoint (for users) 
+ - [ ] (re-)Introduce tests
  - [ ] Introduce [security](https://www.baeldung.com/registration-with-spring-mvc-and-spring-security) or [security](https://www.toptal.com/java/rest-security-with-jwt-spring-security-and-java)
+ - [ ] Introduce docker
  - [ ] Implement FE
 
 ### API Definition
