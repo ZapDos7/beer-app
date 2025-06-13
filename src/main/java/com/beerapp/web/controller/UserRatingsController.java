@@ -7,17 +7,17 @@ import com.beerapp.web.resource.BeerRatingResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import java.util.List;
 import java.util.UUID;
 
 @RestController
 @RequestMapping("/user/{userId}/rate/")
-public class UserController {
+public class UserRatingsController {
 
     private final RatingService ratingService;
 
-    public UserController(RatingService ratingService) {
+    public UserRatingsController(RatingService ratingService) {
         this.ratingService = ratingService;
     }
 
