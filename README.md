@@ -42,14 +42,7 @@ A simple Spring Boot app which displays a list of beers, information about them 
 * Used [JWT](https://jwt.io/) for authentication
 
 ## To Dos
-- [x] Introduce get user details endpoint (for users)
-- [x] Introduce authentication and authorization
-- [ ] Add user: send ticket to support
-- [x] Add user: request account deletion
-- [ ] Add admin endpoint: flag a user (e.g. restricted)
-- [ ] Add admin endpoint: edit a user's info (upon request)
 - [ ] Add admin endpoints: add/delete country
-- [ ] (re-)Introduce tests
 - [ ] Introduce docker
 - [ ] Implement FE
 
