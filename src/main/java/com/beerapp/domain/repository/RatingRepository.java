@@ -6,14 +6,13 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @Repository
 public interface RatingRepository  extends JpaRepository<Rating, Rating.RatingId> {
-    List<Rating> findByUserId(UUID userId);
+    List<Rating> findByUserId(Long userId);
 
-    Optional<Rating> findByUserIdAndBeerId(UUID userId, UUID beerId);
+    Optional<Rating> findByUserIdAndBeerId(Long userId, Long beerId);
 
-    void deleteByUserIdAndBeerId(UUID userId, UUID beerId);
+    void deleteByUserIdAndBeerId(Long userId, Long beerId);
 }
 

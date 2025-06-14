@@ -4,7 +4,9 @@ package com.beerapp.service;
 import com.beerapp.domain.Beer;
 import com.beerapp.domain.enums.BeerType;
 import com.beerapp.domain.repository.BeerRepository;
-import com.beerapp.exceptions.BeerException;
+import com.beerapp.exceptions.BadRequestException;
+import com.beerapp.exceptions.ErrorCode;
+import com.beerapp.exceptions.NotFoundException;
 import com.beerapp.web.request.AddBeerRequest;
 import com.beerapp.web.request.EditBeerRequest;
 import org.slf4j.Logger;
@@ -12,7 +14,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.UUID;
 
 @Service
 public class BeerService {
@@ -33,26 +34,26 @@ public class BeerService {
         return beerRepository.findByCriteria(country, type);
     }
 
-    public Beer getOne(UUID id) throws BeerException {
+    public Beer getOne(Long id) throws NotFoundException {
         return beerRepository.findById(id).orElseThrow(() -> {
             logger.error("Could not find beer with id {}", id);
-            return new BeerException("Beer", id);
+            return new NotFoundException(ErrorCode.BEER_NOT_FOUND);
         });
     }
 
     /* Admin */
 
     //add
-    public Beer addBeer(AddBeerRequest request) throws BeerException {
+    public Beer addBeer(AddBeerRequest request) throws BadRequestException {
         if (!countryService.isSupportedCountryName(request.getCountryOfOrigin())) {
-            throw new BeerException("edit beer: invalid country name");
+            throw new BadRequestException(ErrorCode.UNSUPPORTED_COUNTRY);
         }
         return beerRepository.save(new Beer(request));
     }
 
     //edit
 
-    public Beer editBeer(UUID beerId, EditBeerRequest request) throws BeerException{
+    public Beer editBeer(Long beerId, EditBeerRequest request) throws BadRequestException, NotFoundException {
         var beer = getOne(beerId);
 
         if (request.getName() != null) {
@@ -60,7 +61,7 @@ public class BeerService {
         }
         if (request.getCountryOfOrigin() != null) {
             if (!countryService.isSupportedCountryName(request.getCountryOfOrigin())) {
-                throw new BeerException("edit beer: invalid country name");
+                throw new BadRequestException(ErrorCode.UNSUPPORTED_COUNTRY);
             }
             beer.setCountryOfOrigin(request.getCountryOfOrigin());
         }
@@ -70,14 +71,11 @@ public class BeerService {
         if (request.getType() != null) {
             beer.setType(BeerType.valueOf(request.getType()));
         }
-        if (request.getMoreInfo() != null) {
-            beer.setMoreInfo(request.getMoreInfo());
-        }
         return beerRepository.save(beer);
     }
 
     //delete
-    public void deleteBeer(UUID beerId) {
+    public void deleteBeer(Long beerId) {
         beerRepository.deleteById(beerId);
     }
 }

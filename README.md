@@ -17,13 +17,14 @@ A simple Spring Boot app which displays a list of beers, information about them 
 ### Public Endpoints (do not require log in)
 1. View all beers
 2. View a beer's details
+3. Sign up 
+4. Log in
 
 ### User Endpoints (require log in)
 1. View all user's ratings
 2. Add/Edit rating to beer
 3. Delete rating of beer
 4. View account info
-5. Edit account info
 
 ### Admin Endpoints (require log in & admin rights)
 1. Add a new beer
@@ -36,17 +37,19 @@ A simple Spring Boot app which displays a list of beers, information about them 
 
 ![DB Schema](https://github.com/ZapDos7/beer-app/blob/feature/reboot/src/main/resources/schema.png "DB Schema")
 
+## Technologies
+
+* Used JWT for authentication
+
 ## To Dos
 - [x] Introduce get user details endpoint (for users)
+- [x] Introduce authentication and authorization
 - [ ] Add user: send ticket to support
-- [x] Add user endpoint: edit info
 - [ ] Add user: request account deletion
 - [ ] Add admin endpoint: flag a user (e.g. restricted)
 - [ ] Add admin endpoint: edit a user's info (upon request)
 - [ ] Add admin endpoints: add/delete country
-- [ ] Add user ratings endpoint: add first beer rating or expand existing endpoint
 - [ ] (re-)Introduce tests
-- [ ] Introduce [spring security](https://www.baeldung.com/registration-with-spring-mvc-and-spring-security) and [jwt](https://www.toptal.com/java/rest-security-with-jwt-spring-security-and-java): Sign up, log in
 - [ ] Introduce docker
 - [ ] Implement FE
 

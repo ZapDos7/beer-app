@@ -31,6 +31,9 @@ spring:
     locations: "classpath:migration/"
     baselineOnMigrate: true
     schemas: beers
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
 
 server:
   port: 8080
@@ -42,6 +45,7 @@ logging:
   level:
     ROOT: INFO
     com.beerapp.service: DEBUG
+    org.springframework.security: DEBUG
 
 # Actuator
 management:
@@ -49,3 +53,6 @@ management:
     web:
       exposure:
         include: health
+
+# Security
+jwt.secret: "dkS2n9tBvmn3XsZ5qW8RmEpLcTY9vPxDfajGhKwM"

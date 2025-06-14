@@ -1,0 +1,29 @@
+meta {
+  name: Log In
+  type: http
+  seq: 2
+}
+
+post {
+  url: http://localhost:8080/auth/login
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "password" : "admin",
+    "email" : "admin@email.com"
+  }
+}
+
+script:post-response {
+  const json = res.body;
+  
+  if (json.token) {
+    bru.setEnvVar("jwt_token", json.token);
+  } else {
+    throw new Error("Token not found in response");
+  }
+  
+}

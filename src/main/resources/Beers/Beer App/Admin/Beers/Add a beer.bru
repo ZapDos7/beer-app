@@ -7,15 +7,18 @@ meta {
 post {
   url: http://localhost:8080/admin/beers
   body: json
-  auth: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{jwt_token}}
 }
 
 body:json {
   {
-      "name" : "name",
-      "countryOfOrigin" : "countryOfOrigin",
+      "name" : "Mythos",
+      "countryOfOrigin" : "Greece",
       "description" : "description",
-      "type" : "ALE",
-      "moreInfo" : "foo bar"
+      "type" : "ALE"
   }
 }

@@ -4,9 +4,8 @@ import jakarta.persistence.*;
 import org.springframework.data.annotation.CreatedDate;
 
 import java.io.Serializable;
-import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.Objects;
-import java.util.UUID;
 
 @Entity
 @Table(name = "rating")
@@ -14,30 +13,30 @@ import java.util.UUID;
 public class Rating {
 
     public static class RatingId implements Serializable {
-        private String beerId;
-        private String userId;
+        private Long beerId;
+        private Long userId;
 
         public RatingId() {
         }
 
-        public RatingId(String beerId, String userId) {
+        public RatingId(Long beerId, Long userId) {
             this.beerId = beerId;
             this.userId = userId;
         }
 
-        public String getBeerId() {
+        public Long getBeerId() {
             return beerId;
         }
 
-        public void setBeerId(String beerId) {
+        public void setBeerId(Long beerId) {
             this.beerId = beerId;
         }
 
-        public String getUserId() {
+        public Long getUserId() {
             return userId;
         }
 
-        public void setUserId(String userId) {
+        public void setUserId(Long userId) {
             this.userId = userId;
         }
 
@@ -56,32 +55,39 @@ public class Rating {
     }
     @Id
     @Column(name = "beer_id")
-    private UUID beerId;
+    private Long beerId;
     @Id
     @Column(name = "user_id")
-    private UUID userId;
+    private Long userId;
     @Column(name = "rating")
     private int rating;
     @Column(name = "rating_date")
     @CreatedDate
-    private Instant ratingDate;
+    private LocalDateTime ratingDate;
 
     public Rating() {
     }
 
-    public UUID getBeerId() {
+    public Rating(Long userId, Long beerId, int rating) {
+        this.beerId = beerId;
+        this.userId = userId;
+        this.rating = rating;
+        this.ratingDate = LocalDateTime.now();
+    }
+
+    public Long getBeerId() {
         return beerId;
     }
 
-    public void setBeerId(UUID beerId) {
+    public void setBeerId(Long beerId) {
         this.beerId = beerId;
     }
 
-    public UUID getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(UUID userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 
@@ -93,11 +99,11 @@ public class Rating {
         this.rating = rating;
     }
 
-    public Instant getRatingDate() {
+    public LocalDateTime getRatingDate() {
         return ratingDate;
     }
 
-    public void setRatingDate(Instant ratingDate) {
+    public void setRatingDate(LocalDateTime ratingDate) {
         this.ratingDate = ratingDate;
     }
 }

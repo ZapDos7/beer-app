@@ -1,21 +1,22 @@
 package com.beerapp.web.controller;
 
 import com.beerapp.domain.Rating;
-import com.beerapp.exceptions.BeerException;
 import com.beerapp.service.RatingService;
 import com.beerapp.web.request.EditRatingRequest;
+import com.beerapp.web.utils.AuthUserProvider;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.UUID;
 
 @Tag(name = "Ratings", description = "Manage user's ratings")
 @RestController
-@RequestMapping("/user/{userId}/rate/")
+@PreAuthorize("hasRole('USER')")
+@RequestMapping("/ratings/")
 public class UserRatingsController {
 
     private final RatingService ratingService;
@@ -26,30 +27,20 @@ public class UserRatingsController {
 
     @Operation(summary = "Get all ratings of a user")
     @GetMapping
-    public ResponseEntity<List<Rating>> viewUserRatings(
-            @PathVariable(name = "userId") UUID userId) {
-        return ResponseEntity.ok(ratingService.getAllUserRatings(userId));
+    public ResponseEntity<List<Rating>> viewUserRatings() {
+        return ResponseEntity.ok(ratingService.getAllUserRatings(AuthUserProvider.getCurrentUser().getId()));
     }
 
-    @Operation(summary = "Edit a rating of a user")
-    @PutMapping("/{beerId}")
-    public ResponseEntity<Rating> rate(
-            @PathVariable(name = "userId") UUID userId,
-            @PathVariable(name = "beerId") UUID beerId,
-            @RequestBody @Valid EditRatingRequest request) {
-        try {
-            return ResponseEntity.ok((ratingService.rate(userId, beerId, request)));
-        } catch (BeerException e) {
-            return ResponseEntity.notFound().build();
-        }
+    @Operation(summary = "Add a new rating or edit an existing one")
+    @PutMapping("/{id}")
+    public ResponseEntity<Rating> rate(@PathVariable(name = "id") Long id, @RequestBody @Valid EditRatingRequest request) {
+        return ResponseEntity.ok((ratingService.rate(AuthUserProvider.getCurrentUser().getId(), id, request)));
     }
 
-    @Operation(summary = "Delete a rating of a user")
-    @DeleteMapping("/{beerId}")
-    public ResponseEntity<Void> deleteARating(
-            @PathVariable(name = "userId") UUID userId,
-            @PathVariable(name = "beerId") UUID beerId) {
-        ratingService.deleteRating(userId, beerId);
+    @Operation(summary = "Delete a rating for a beer")
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteARating(@PathVariable(name = "id") Long id) {
+        ratingService.deleteRating(AuthUserProvider.getCurrentUser().getId(), id);
         return ResponseEntity.noContent().build();
     }
 }

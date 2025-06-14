@@ -5,16 +5,15 @@ import com.beerapp.web.request.AddBeerRequest;
 import jakarta.persistence.*;
 import org.springframework.data.annotation.CreatedDate;
 
-import java.time.Instant;
-import java.util.UUID;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "beer")
 public class Beer {
     @Id
-    @GeneratedValue(generator = "uuid-hibernate-generator")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", unique = true, nullable = false)
-    private UUID id;
+    private Long id;
     @Column(name = "name")
     private String name;
     @Column(name = "country_of_origin")
@@ -26,9 +25,7 @@ public class Beer {
     private BeerType type;
     @Column(name = "date_created")
     @CreatedDate
-    private Instant dateCreated;
-    @Column(name = "more_info")
-    private String moreInfo;
+    private LocalDateTime dateCreated;
 
     public Beer() {
     }
@@ -38,15 +35,14 @@ public class Beer {
         this.countryOfOrigin = request.getCountryOfOrigin();
         this.description = request.getDescription();
         this.type = request.getType();
-        this.dateCreated = Instant.now();
-        this.moreInfo = request.getMoreInfo();
+        this.dateCreated = LocalDateTime.now();
     }
 
-    public UUID getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -82,19 +78,11 @@ public class Beer {
         this.type = type;
     }
 
-    public Instant getDateCreated() {
+    public LocalDateTime getDateCreated() {
         return dateCreated;
     }
 
-    public void setDateCreated(Instant dateCreated) {
+    public void setDateCreated(LocalDateTime dateCreated) {
         this.dateCreated = dateCreated;
-    }
-
-    public String getMoreInfo() {
-        return moreInfo;
-    }
-
-    public void setMoreInfo(String moreInfo) {
-        this.moreInfo = moreInfo;
     }
 }

@@ -1,11 +1,11 @@
 meta {
-  name: Delete rating
+  name: Delete a beer
   type: http
-  seq: 3
+  seq: 1
 }
 
 delete {
-  url: http://localhost:8080/ratings/1
+  url: http://localhost:8080/admin/beers/{id}
   body: none
   auth: bearer
 }

@@ -2,13 +2,11 @@ package com.beerapp.service;
 
 import com.beerapp.domain.Rating;
 import com.beerapp.domain.repository.RatingRepository;
-import com.beerapp.exceptions.BeerException;
 import com.beerapp.web.request.EditRatingRequest;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
-import java.time.Instant;
 import java.util.List;
-import java.util.UUID;
 
 @Service
 public class RatingService {
@@ -18,19 +16,22 @@ public class RatingService {
         this.ratingRepository = ratingRepository;
     }
 
-    public List<Rating> getAllUserRatings(UUID userId) {
+    public List<Rating> getAllUserRatings(Long userId) {
         return ratingRepository.findByUserId(userId);
     }
 
-    public Rating rate(UUID userId, UUID beerId, EditRatingRequest request) throws BeerException {
-        var rating = ratingRepository.findByUserIdAndBeerId(userId, beerId)
-                .orElseThrow(() -> new BeerException(BeerException.BEER_NOT_FOUND));
-        rating.setRating(request.getNewRating()); //rating.setRating(request.getNewRating())
-        rating.setRatingDate(Instant.now()); // todo check if needed or omitted que to sql
-        return ratingRepository.save(rating);
+    public Rating rate(Long userId, Long beerId, EditRatingRequest request) {
+        var ratingOptional = ratingRepository.findByUserIdAndBeerId(userId, beerId);
+        if (ratingOptional.isPresent()) {
+            ratingOptional.get().setRating(request.getNewRating());
+            return ratingRepository.save(ratingOptional.get());
+        } else {
+            return ratingRepository.save(new Rating(userId, beerId, request.getNewRating()));
+        }
     }
 
-    public void deleteRating(UUID userId, UUID beerId) {
+    @Transactional
+    public void deleteRating(Long userId, Long beerId) {
         ratingRepository.deleteByUserIdAndBeerId(userId, beerId);
     }
 }

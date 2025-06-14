@@ -11,7 +11,6 @@ public class AddBeerRequest {
     private String description;
     @NotBlank(message = "Must provide beer type")
     private BeerType type;
-    private String moreInfo;
 
     public AddBeerRequest() {
     }
@@ -46,13 +45,5 @@ public class AddBeerRequest {
 
     public void setType(BeerType type) {
         this.type = type;
-    }
-
-    public String getMoreInfo() {
-        return moreInfo;
-    }
-
-    public void setMoreInfo(String moreInfo) {
-        this.moreInfo = moreInfo;
     }
 }

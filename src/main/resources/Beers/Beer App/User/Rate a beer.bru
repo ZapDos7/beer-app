@@ -5,13 +5,17 @@ meta {
 }
 
 put {
-  url: http://localhost:8080/user/{userId}/rate/{beerId}
+  url: http://localhost:8080/ratings/4
   body: json
-  auth: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{jwt_token}}
 }
 
 body:json {
   {
-      "newRating" : 4
+      "newRating" : 1
   }
 }
