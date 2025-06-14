@@ -47,8 +47,12 @@ public class UserService implements UserDetailsService {
         return userRepository.save(user);
     }
 
-    public void deleteById(Long userId) {
-        logger.trace("Deleting user {}", userId);
+    public void deleteById(Long userId, boolean userRequest) {
+        if (userRequest) {
+            logger.trace("User {} requested account deletion", userId);
+        } else {
+            logger.trace("Purging user {} account", userId);
+        }
         userRepository.deleteById(userId);
     }
 }
