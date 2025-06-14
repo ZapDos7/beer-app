@@ -31,7 +31,7 @@ public class AdminUserController {
     @Operation(summary = "Admin: Delete a user")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable(name = "id") Long userId) {
-        userService.deleteById(userId);
+        userService.deleteById(userId, false);
         return ResponseEntity.noContent().build();
     }
 }
