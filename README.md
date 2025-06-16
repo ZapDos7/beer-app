@@ -45,14 +45,6 @@ A simple Spring Boot app which displays a list of beers, information about them 
 
 ## Technologies
 
-<<<<<<< HEAD
-* Used [JWT](https://jwt.io/) for authentication ([read here](https://www.unlogged.io/post/integrating-jwt-with-spring-security-6-in-spring-boot-3))
-
-## To Dos
-- [ ] Introduce docker [1](https://spring.io/guides/gs/spring-boot-docker), [2](https://www.baeldung.com/dockerizing-spring-boot-application), [3](https://docs.docker.com/guides/docker-overview/)
-- [ ] Implement FE [react](https://www.freecodecamp.org/news/full-stack-development-with-mongodb-java-and-react/) or [node](https://www.freecodecamp.org/news/learn-full-stack-development-html-css-javascript-node-js-mongodb/)
-- [ ] [Deploy to AWS](https://www.freecodecamp.org/news/how-to-deploy-your-freecodecamp-project-on-aws/)
-=======
 * Used [JWT](https://jwt.io/) for authentication
 * Used Redis for country management (since they're only stored as a `String`, this was a simple and effective solution, more light-weight than adding another SQL table.)
 * Used OpenAPI for documentation
