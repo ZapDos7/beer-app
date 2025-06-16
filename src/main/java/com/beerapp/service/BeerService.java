@@ -45,9 +45,7 @@ public class BeerService {
 
     //add
     public Beer addBeer(AddBeerRequest request) throws BadRequestException {
-        if (!countryService.isSupportedCountryName(request.getCountryOfOrigin())) {
-            throw new BadRequestException(ErrorCode.UNSUPPORTED_COUNTRY);
-        }
+        validateCountry(request.getCountryOfOrigin());
         return beerRepository.save(new Beer(request));
     }
 
@@ -60,9 +58,7 @@ public class BeerService {
             beer.setName(request.getName());
         }
         if (request.getCountryOfOrigin() != null) {
-            if (!countryService.isSupportedCountryName(request.getCountryOfOrigin())) {
-                throw new BadRequestException(ErrorCode.UNSUPPORTED_COUNTRY);
-            }
+            validateCountry(request.getCountryOfOrigin());
             beer.setCountryOfOrigin(request.getCountryOfOrigin());
         }
         if (request.getDescription() != null) {
@@ -77,5 +73,12 @@ public class BeerService {
     //delete
     public void deleteBeer(Long beerId) {
         beerRepository.deleteById(beerId);
+    }
+
+    // validate helpers
+    private void validateCountry(String countryName) throws BadRequestException {
+        if (!countryService.isSupportedCountryName(countryName)) {
+            throw new BadRequestException(ErrorCode.UNSUPPORTED_COUNTRY);
+        }
     }
 }
