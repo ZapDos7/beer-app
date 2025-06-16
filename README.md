@@ -41,7 +41,7 @@ A simple Spring Boot app which displays a list of beers, information about them 
 
 ## DB Schema
 
-![DB Schema](https://github.com/ZapDos7/beer-app/blob/feature/reboot/src/main/resources/schema.png "DB Schema")
+![DB Schema](https://github.com/ZapDos7/beer-app/blob/main/src/main/resources/schema.png "DB Schema")
 
 ## Technologies
 
