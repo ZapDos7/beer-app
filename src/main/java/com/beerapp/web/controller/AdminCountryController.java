@@ -12,7 +12,7 @@ import java.util.Set;
 @Tag(name = "Countries", description = "Manage countries as admin")
 @RestController
 @PreAuthorize("hasRole('ADMIN')")
-@RequestMapping("/countries")
+@RequestMapping("/admin/countries")
 public class AdminCountryController {
     private final CountryService countryService;
 
