@@ -27,11 +27,17 @@ A simple Spring Boot app which displays a list of beers, information about them 
 4. View account info
 
 ### Admin Endpoints (require log in & admin rights)
-1. Add a new beer
-2. Edit an existing beer's info
-3. Delete a beer
-4. View all users
-5. Delete a user
+1. Beers:
+   * Add a new beer
+   * Edit an existing beer's info
+   * Delete a beer
+2. Users:
+   * View all users
+   * Delete a user
+3. Countries:
+   * Get all countries
+   * Add a country
+   * Delete a country
 
 ## DB Schema
 
@@ -39,12 +45,24 @@ A simple Spring Boot app which displays a list of beers, information about them 
 
 ## Technologies
 
+<<<<<<< HEAD
 * Used [JWT](https://jwt.io/) for authentication ([read here](https://www.unlogged.io/post/integrating-jwt-with-spring-security-6-in-spring-boot-3))
 
 ## To Dos
 - [ ] Introduce docker [1](https://spring.io/guides/gs/spring-boot-docker), [2](https://www.baeldung.com/dockerizing-spring-boot-application), [3](https://docs.docker.com/guides/docker-overview/)
 - [ ] Implement FE [react](https://www.freecodecamp.org/news/full-stack-development-with-mongodb-java-and-react/) or [node](https://www.freecodecamp.org/news/learn-full-stack-development-html-css-javascript-node-js-mongodb/)
 - [ ] [Deploy to AWS](https://www.freecodecamp.org/news/how-to-deploy-your-freecodecamp-project-on-aws/)
+=======
+* Used [JWT](https://jwt.io/) for authentication
+* Used Redis for country management (since they're only stored as a `String`, this was a simple and effective solution, more light-weight than adding another SQL table.)
+* Used OpenAPI for documentation
+* Used Bruno for testing
+* Used JUnit & Mockito for testing
+
+## To Dos
+- [ ] Introduce docker
+- [ ] Implement FE
+>>>>>>> 845423b (added country management API)
 
 ### Support
 For comments, ideas, issues or general talks about this project, feel free to [open an issue](https://github.com/ZapDos7/beer-app/issues/new/choose). 

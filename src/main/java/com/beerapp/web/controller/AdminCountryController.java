@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.Set;
 
 @Tag(name = "Countries", description = "Manage countries as admin")
 @RestController
@@ -22,19 +22,21 @@ public class AdminCountryController {
 
     @Operation(summary = "Get countries")
     @GetMapping
-    public ResponseEntity<List<String>> getCountryNames() {
-        return ResponseEntity.ok(countryService.countryNames());
+    public ResponseEntity<Set<String>> getCountryNames() {
+        return ResponseEntity.ok(countryService.getAllCountries());
     }
 
     @Operation(summary = "Add a country")
     @PostMapping
-    public ResponseEntity<String> addCountry(@RequestBody AddCountryRequest request) {
-        return ResponseEntity.ok(countryService.addCountry(request));
+    public ResponseEntity<String> addCountry(@RequestParam String name) {
+        countryService.addCountry(name);
+        return ResponseEntity.noContent().build();
     }
 
     @Operation(summary = "Delete a country")
-    @DeleteMapping(path = "{name}")
-    public ResponseEntity<String> deleteCountry(@PathVariable(name = "name") String name) {
-        return ResponseEntity.ok(countryService.deleteCountry(name));
+    @DeleteMapping
+    public ResponseEntity<String> deleteCountry(@RequestParam String name) {
+        countryService.removeCountry(name);
+        return ResponseEntity.noContent().build();
     }
 }
