@@ -4,9 +4,15 @@ A simple Spring Boot app which displays a list of beers, information about them 
 
 ## Instructions
 
-1. Clone the repository to your local machine. Ensure you have **Java 17**, **Maven**, and **MySQL** installed.
-2. Update the database credentials in `application.yml`.
-3. Run the app using maven with `mvn spring-boot:run` or using your preferred IDE.
+1. Clone the repository to your local machine. Ensure you have **Java 17**, **Maven**, **MySQL**  & **Redis** installed.
+2. To run locally:
+   1. Update the database credentials in `application.yml`.
+   2. Start MySQL
+   3. Start Redis (If you're using Windows, for easiness, run Redis using docker like so: `docker run --name redis-dev -p 6379:6379 -d redis`)
+   4. Run the app using maven with `mvn spring-boot:run` or using your preferred IDE.
+3. Alternatively, use Docker:
+   1. `docker run -p 8080:8080 --name spring-app my-spring-app`
+   2. `docker-compose up --build`
 4. While the app is running, you can:
     1. Access the app's endpoints [via browser](http://localhost:8080), `cURL`, or any API client of your choice. </br>A list of available endpoints (as JSON) can be found [here](https://github.com/ZapDos7/beer-app/blob/main/src/main/resources/postman.json).
     2. Explore the interactive API documentation via [Swagger](http://localhost:8080/swagger-ui.html) for more info.
@@ -53,8 +59,8 @@ A simple Spring Boot app which displays a list of beers, information about them 
 
 ## To Dos
 - [ ] Introduce docker
+- [ ] Send verification emails to users upon sign up / add verification logic
 - [ ] Implement FE
->>>>>>> 845423b (added country management API)
 
 ### Support
 For comments, ideas, issues or general talks about this project, feel free to [open an issue](https://github.com/ZapDos7/beer-app/issues/new/choose). 
