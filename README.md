@@ -61,6 +61,7 @@ A simple Spring Boot app which displays a list of beers, information about them 
 - [ ] Introduce docker
 - [ ] Send verification emails to users upon sign up / add verification logic
 - [ ] Implement FE
+- [ ] Implement recommendation system
 
 ### Support
 For comments, ideas, issues or general talks about this project, feel free to [open an issue](https://github.com/ZapDos7/beer-app/issues/new/choose). 
