@@ -29,6 +29,10 @@ public class User implements UserDetails {
     @Column(name = "sign_up_date")
     @CreatedDate
     private LocalDateTime signUpDate;
+    @Column(name = "verified")
+    private boolean verified = false;
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private VerificationToken verificationToken;
 
     public User() {
     }
@@ -37,6 +41,7 @@ public class User implements UserDetails {
         this.email = email;
         this.role = isAdmin ? Role.ADMIN : Role.USER;
         this.signUpDate = LocalDateTime.now();
+        this.verified = false;
     }
 
     public Long getId() {
@@ -78,6 +83,14 @@ public class User implements UserDetails {
 
     public void setSignUpDate(LocalDateTime signUpDate) {
         this.signUpDate = signUpDate;
+    }
+
+    public boolean isVerified() {
+        return verified;
+    }
+
+    public void setVerified(boolean verified) {
+        this.verified = verified;
     }
 
     // --- Implemented from UserDetails ---
