@@ -121,6 +121,11 @@
             <artifactId>spring-security-crypto</artifactId>
         </dependency>
 
+        <!-- Email Sending -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
+        </dependency>
 
     </dependencies>
     <build>

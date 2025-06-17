@@ -58,8 +58,8 @@ A simple Spring Boot app which displays a list of beers, information about them 
 * Used JUnit & Mockito for testing
 
 ## To Dos
-- [ ] Introduce docker
 - [ ] Send verification emails to users upon sign up / add verification logic
+- [ ] Introduce docker
 - [ ] Implement FE
 - [ ] Implement recommendation system
 
