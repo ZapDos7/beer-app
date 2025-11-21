@@ -1,16 +1,17 @@
 package com.beerapp.domain;
 
-import com.beerapp.domain.enums.Role;
+import java.time.LocalDateTime;
+import java.util.Collection;
+import java.util.List;
 
-import jakarta.persistence.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.time.LocalDateTime;
-import java.util.Collection;
-import java.util.List;
+import com.beerapp.domain.enums.Role;
+
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "users")
@@ -19,19 +20,22 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", unique = true, nullable = false)
     private Long id;
+
     @Column(name = "email", unique = true)
     private String email;
+
     @Column(name = "password")
     private String password;
+
     @Column(name = "role")
     @Enumerated(EnumType.STRING)
     private Role role;
+
     @Column(name = "sign_up_date")
     @CreatedDate
     private LocalDateTime signUpDate;
 
-    public User() {
-    }
+    public User() {}
 
     public User(String email, boolean isAdmin) {
         this.email = email;

@@ -7,12 +7,13 @@ public class SignUpRequest {
     @NotBlank(message = "Must provide email")
     @Email
     private String email;
+
     @NotBlank(message = "Must provide passord")
     private String password;
+
     private boolean isAdmin = false;
 
-    public SignUpRequest() {
-    }
+    public SignUpRequest() {}
 
     public String getPassword() {
         return password;

@@ -1,5 +1,10 @@
 package com.beerapp.service;
 
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
 import com.beerapp.domain.Beer;
 import com.beerapp.domain.enums.BeerType;
@@ -9,11 +14,6 @@ import com.beerapp.exceptions.ErrorCode;
 import com.beerapp.exceptions.NotFoundException;
 import com.beerapp.web.request.AddBeerRequest;
 import com.beerapp.web.request.EditBeerRequest;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class BeerService {
@@ -35,23 +35,27 @@ public class BeerService {
     }
 
     public Beer getOne(Long id) throws NotFoundException {
-        return beerRepository.findById(id).orElseThrow(() -> {
-            logger.error("Could not find beer with id {}", id);
-            return new NotFoundException(ErrorCode.BEER_NOT_FOUND);
-        });
+        return beerRepository
+                .findById(id)
+                .orElseThrow(
+                        () -> {
+                            logger.error("Could not find beer with id {}", id);
+                            return new NotFoundException(ErrorCode.BEER_NOT_FOUND);
+                        });
     }
 
     /* Admin */
 
-    //add
+    // add
     public Beer addBeer(AddBeerRequest request) throws BadRequestException {
         validateCountry(request.getCountryOfOrigin());
         return beerRepository.save(new Beer(request));
     }
 
-    //edit
+    // edit
 
-    public Beer editBeer(Long beerId, EditBeerRequest request) throws BadRequestException, NotFoundException {
+    public Beer editBeer(Long beerId, EditBeerRequest request)
+            throws BadRequestException, NotFoundException {
         var beer = getOne(beerId);
 
         if (request.getName() != null) {
@@ -70,7 +74,7 @@ public class BeerService {
         return beerRepository.save(beer);
     }
 
-    //delete
+    // delete
     public void deleteBeer(Long beerId) {
         beerRepository.deleteById(beerId);
     }

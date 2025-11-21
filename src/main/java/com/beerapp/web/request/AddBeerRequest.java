@@ -1,19 +1,22 @@
 package com.beerapp.web.request;
 
 import com.beerapp.domain.enums.BeerType;
+
 import jakarta.validation.constraints.NotBlank;
 
 public class AddBeerRequest {
     @NotBlank(message = "Must provide name")
     private String name;
+
     @NotBlank(message = "Must provide country of origin")
     private String countryOfOrigin;
+
     private String description;
+
     @NotBlank(message = "Must provide beer type")
     private BeerType type;
 
-    public AddBeerRequest() {
-    }
+    public AddBeerRequest() {}
 
     public String getName() {
         return name;

@@ -1,11 +1,12 @@
 package com.beerapp.domain;
 
-import jakarta.persistence.*;
-import org.springframework.data.annotation.CreatedDate;
-
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
+
+import org.springframework.data.annotation.CreatedDate;
+
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "rating")
@@ -16,8 +17,7 @@ public class Rating {
         private Long beerId;
         private Long userId;
 
-        public RatingId() {
-        }
+        public RatingId() {}
 
         public RatingId(Long beerId, Long userId) {
             this.beerId = beerId;
@@ -45,7 +45,8 @@ public class Rating {
             if (this == o) return true;
             if (o == null || getClass() != o.getClass()) return false;
             RatingId ratingId = (RatingId) o;
-            return Objects.equals(beerId, ratingId.beerId) && Objects.equals(userId, ratingId.userId);
+            return Objects.equals(beerId, ratingId.beerId)
+                    && Objects.equals(userId, ratingId.userId);
         }
 
         @Override
@@ -53,20 +54,23 @@ public class Rating {
             return Objects.hash(beerId, userId);
         }
     }
+
     @Id
     @Column(name = "beer_id")
     private Long beerId;
+
     @Id
     @Column(name = "user_id")
     private Long userId;
+
     @Column(name = "rating")
     private int rating;
+
     @Column(name = "rating_date")
     @CreatedDate
     private LocalDateTime ratingDate;
 
-    public Rating() {
-    }
+    public Rating() {}
 
     public Rating(Long userId, Long beerId, int rating) {
         this.beerId = beerId;

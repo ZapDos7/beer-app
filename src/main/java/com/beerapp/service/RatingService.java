@@ -1,12 +1,14 @@
 package com.beerapp.service;
 
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
 import com.beerapp.domain.Rating;
 import com.beerapp.domain.repository.RatingRepository;
 import com.beerapp.web.request.EditRatingRequest;
-import jakarta.transaction.Transactional;
-import org.springframework.stereotype.Service;
 
-import java.util.List;
+import jakarta.transaction.Transactional;
 
 @Service
 public class RatingService {

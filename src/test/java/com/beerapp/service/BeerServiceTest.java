@@ -1,8 +1,7 @@
 package com.beerapp.service;
 
-import com.beerapp.domain.Beer;
-import com.beerapp.domain.repository.BeerRepository;
-import com.beerapp.exceptions.NotFoundException;
+import java.util.Optional;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -10,15 +9,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
-import java.util.Optional;
+import com.beerapp.domain.Beer;
+import com.beerapp.domain.repository.BeerRepository;
+import com.beerapp.exceptions.NotFoundException;
 
 @SpringBootTest
 public class BeerServiceTest {
-    @Autowired
-    private BeerService beerService;
+    @Autowired private BeerService beerService;
 
-    @MockBean
-    private BeerRepository beerRepository;
+    @MockBean private BeerRepository beerRepository;
 
     @Test
     void getOne_returnsBeer() {

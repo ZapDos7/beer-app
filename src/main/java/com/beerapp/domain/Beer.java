@@ -1,11 +1,13 @@
 package com.beerapp.domain;
 
-import com.beerapp.domain.enums.BeerType;
-import com.beerapp.web.request.AddBeerRequest;
-import jakarta.persistence.*;
+import java.time.LocalDateTime;
+
 import org.springframework.data.annotation.CreatedDate;
 
-import java.time.LocalDateTime;
+import com.beerapp.domain.enums.BeerType;
+import com.beerapp.web.request.AddBeerRequest;
+
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "beer")
@@ -14,21 +16,26 @@ public class Beer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", unique = true, nullable = false)
     private Long id;
+
     @Column(name = "name")
     private String name;
+
     @Column(name = "country_of_origin")
     private String countryOfOrigin;
+
     @Column(name = "description")
     private String description;
-    @Column(name = "type") //('ALE', 'LAGER', 'PORTER', 'STOUT', 'BLONDE_ALE', 'BROWN_ALE', 'PALE_ALE', 'IPA', 'WHEAT', 'PILSNER', 'SOUR_ALE') NOT NULL,
+
+    @Column(name = "type") // ('ALE', 'LAGER', 'PORTER', 'STOUT', 'BLONDE_ALE', 'BROWN_ALE',
+    // 'PALE_ALE', 'IPA', 'WHEAT', 'PILSNER', 'SOUR_ALE') NOT NULL,
     @Enumerated(EnumType.STRING)
     private BeerType type;
+
     @Column(name = "date_created")
     @CreatedDate
     private LocalDateTime dateCreated;
 
-    public Beer() {
-    }
+    public Beer() {}
 
     public Beer(AddBeerRequest request) {
         this.name = request.getName();

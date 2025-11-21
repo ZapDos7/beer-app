@@ -1,17 +1,19 @@
 package com.beerapp.web.controller;
 
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
+
 import com.beerapp.domain.Beer;
 import com.beerapp.exceptions.BadRequestException;
 import com.beerapp.exceptions.NotFoundException;
 import com.beerapp.service.BeerService;
 import com.beerapp.web.request.AddBeerRequest;
 import com.beerapp.web.request.EditBeerRequest;
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.*;
 
 @Tag(name = "Admin Beers", description = "Manage beers as admin")
 @RestController
@@ -33,12 +35,12 @@ public class AdminBeerController {
         } catch (BadRequestException e) {
             return ResponseEntity.badRequest().build();
         }
-
     }
 
     @Operation(summary = "Admin: Edit a beer")
     @PatchMapping("/{id}")
-    public ResponseEntity<Beer> editBeer(@PathVariable(name = "id") Long id, @RequestBody @Valid EditBeerRequest request) {
+    public ResponseEntity<Beer> editBeer(
+            @PathVariable(name = "id") Long id, @RequestBody @Valid EditBeerRequest request) {
         try {
             return ResponseEntity.ok(beerService.editBeer(id, request));
         } catch (NotFoundException e) {
