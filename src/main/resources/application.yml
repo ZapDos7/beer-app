@@ -37,6 +37,19 @@ spring:
   redis:
     host: localhost
     port: 6379
+  # Emails
+  mail:
+    host: 'smtp.gmail.com'
+    port: 587
+    username: beer@gmail.com
+    password: some-password
+    properties:
+      mail:
+        debug: true
+        transport.protocol: smtp
+        smtp:
+          auth: true
+          starttls.enable: true
 
 server:
   port: 8080
@@ -59,3 +72,6 @@ management:
 
 # Security
 jwt.secret: "dkS2n9tBvmn3XsZ5qW8RmEpLcTY9vPxDfajGhKwM"
+
+beer:
+  token-expiration: 15 # in minutes
