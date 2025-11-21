@@ -19,7 +19,8 @@ public class SecurityConfig {
     private final JwtAuthFilter jwtAuthFilter;
     private final AuthenticationProvider authenticationProvider;
 
-    public SecurityConfig(JwtAuthFilter jwtAuthFilter, AuthenticationProvider authenticationProvider) {
+    public SecurityConfig(
+            JwtAuthFilter jwtAuthFilter, AuthenticationProvider authenticationProvider) {
         this.jwtAuthFilter = jwtAuthFilter;
         this.authenticationProvider = authenticationProvider;
     }
@@ -28,11 +29,15 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/auth/**", "/public/**").permitAll() // public endpoints
-                        .requestMatchers("/admin/**").hasRole("ADMIN") // ADMIN only
-                        .anyRequest().authenticated() // else, authenticated
-                )
+                .authorizeHttpRequests(
+                        auth ->
+                                auth.requestMatchers("/auth/**", "/public/**")
+                                        .permitAll() // public endpoints
+                                        .requestMatchers("/admin/**")
+                                        .hasRole("ADMIN") // ADMIN only
+                                        .anyRequest()
+                                        .authenticated() // else, authenticated
+                        )
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();

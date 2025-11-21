@@ -1,8 +1,9 @@
 package com.beerapp.web.utils;
 
-import com.beerapp.domain.User;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+
+import com.beerapp.domain.User;
 
 public class AuthUserProvider {
 

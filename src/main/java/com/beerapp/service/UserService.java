@@ -1,9 +1,7 @@
 package com.beerapp.service;
 
-import com.beerapp.domain.User;
-import com.beerapp.domain.enums.Role;
-import com.beerapp.domain.repository.UserRepository;
-import com.beerapp.web.request.SignUpRequest;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,7 +10,10 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import com.beerapp.domain.User;
+import com.beerapp.domain.enums.Role;
+import com.beerapp.domain.repository.UserRepository;
+import com.beerapp.web.request.SignUpRequest;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -34,10 +35,13 @@ public class UserService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userRepository.findByEmail(username).orElseThrow(() -> {
-            logger.error("Could not find user with username {}", username);
-            return new UsernameNotFoundException(username);
-        });
+        return userRepository
+                .findByEmail(username)
+                .orElseThrow(
+                        () -> {
+                            logger.error("Could not find user with username {}", username);
+                            return new UsernameNotFoundException(username);
+                        });
     }
 
     public User createUser(SignUpRequest request) {

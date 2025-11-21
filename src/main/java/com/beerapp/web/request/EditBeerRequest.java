@@ -1,10 +1,5 @@
 package com.beerapp.web.request;
 
-import com.beerapp.domain.enums.BeerType;
-import jakarta.validation.constraints.NotBlank;
-
-import java.util.Optional;
-
 public class EditBeerRequest {
     private String name;
     private String countryOfOrigin;
@@ -12,8 +7,7 @@ public class EditBeerRequest {
     private String type;
     private String moreInfo;
 
-    public EditBeerRequest() {
-    }
+    public EditBeerRequest() {}
 
     public String getName() {
         return name;
