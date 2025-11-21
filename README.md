@@ -7,8 +7,8 @@ A simple Spring Boot app which displays a list of beers, information about them 
 1. Clone the repository to your local machine. Ensure you have **Java 17**, **Maven**, **MySQL**  & **Redis** installed.
 2. To run locally:
    1. Update the database credentials in `application.yml`.
-   2. Start MySQL
-   3. Start Redis (If you're using Windows, for easiness, run Redis using docker like so: `docker run --name redis-dev -p 6379:6379 -d redis`)
+   2. Start MySQL (via docker: `docker pull mysql:8.0` & `docker run --name mysql-container -e MYSQL_ROOT_PASSWORD=your_password -p 3306:3306 -d mysql:8.0` & `docker exec -it mysql-container mysql -uroot -p` & therein we create a db named `beers` - see application.yml for more info)
+   3. Start Redis (via docker: `docker run --name redis-dev -p 6379:6379 -d redis`)
    4. Run the app using maven with `mvn spring-boot:run` or using your preferred IDE.
 3. Alternatively, use Docker:
    1. `docker run -p 8080:8080 --name spring-app my-spring-app`
@@ -59,7 +59,10 @@ A simple Spring Boot app which displays a list of beers, information about them 
 
 ## To Dos
 - [ ] Introduce docker
+- [ ] Fix spotbugs-maven-plugin
 - [ ] Send verification emails to users upon sign up / add verification logic
+- [ ] Add ModelMapper to differentiate between DAOs and DTOs
+- [ ] Introduce Beverage type e.g. tea! 🫖
 - [ ] Implement FE
 - [ ] Implement recommendation system
 
