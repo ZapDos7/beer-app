@@ -23,6 +23,26 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <!-- Sonarqube -->
+        <sonar.host.url>http://localhost:9000</sonar.host.url>
+
+        <sonar.projectKey>my-spring-boot-app</sonar.projectKey>
+        <sonar.projectName>My Spring Boot App</sonar.projectName>
+
+        <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
+        <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
+
+        <sonar.coverage.jacoco.xmlReportPaths>${project.build.directory}/site/jacoco/jacoco.xml
+        </sonar.coverage.jacoco.xmlReportPaths>
+        <sonar.spotbugs.reportPaths>target/spotbugs/spotbugsXml.xml</sonar.spotbugs.reportPaths>
+
+        <sonar.exclusions>
+            src/main/java/**/*Application.java,
+            src/main/java/**/model/**/*,
+            src/main/java/**/config/**/*
+        </sonar.exclusions>
+
     </properties>
 
     <dependencies>
@@ -125,15 +145,68 @@
     </dependencies>
     <build>
         <plugins>
+            <!-- Flyway -->
             <plugin>
                 <groupId>org.flywaydb</groupId>
                 <artifactId>flyway-maven-plugin</artifactId>
                 <version>10.10.0</version>
             </plugin>
+            <!-- Spring Boot -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+            <!-- JaCoCo -->
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.11</version>
+                <executions>
+                    <execution>
+                        <id>prepare-agent</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/site/jacoco</outputDirectory>
+                        </configuration>
+                        <phase>post-test</phase>
+                    </execution>
+                    <execution>
+                        <id>default-check</id>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <rule>
+                                    <element>BUNDLE</element>
+                                    <limits>
+                                        <limit>
+                                            <counter>INSTRUCTION</counter>
+                                            <value>COVEREDRATIO</value>
+                                            <minimum>0.20</minimum> <!-- todo: ameliorate in the future-->
+                                        </limit>
+                                        <limit>
+                                            <counter>CLASS</counter>
+                                            <value>MISSEDCOUNT</value>
+                                            <maximum>15</maximum> <!-- todo: ameliorate in the future-->
+                                        </limit>
+                                    </limits>
+                                </rule>
+                            </rules>
+                        </configuration>
+                        <phase>verify</phase>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- Spotless -->
             <plugin>
                 <groupId>com.diffplug.spotless</groupId>
                 <artifactId>spotless-maven-plugin</artifactId>
@@ -164,6 +237,67 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>io.github.git-commit-id</groupId>
+                <artifactId>git-commit-id-maven-plugin</artifactId>
+                <version>5.0.0</version>
+                <executions>
+                    <execution>
+                        <id>get-the-git-infos</id>
+                        <goals>
+                            <goal>revision</goal>
+                        </goals>
+                        <phase>initialize</phase>
+                    </execution>
+                </executions>
+                <configuration>
+                    <injectAllReactorProjects>true</injectAllReactorProjects>
+                    <generateGitPropertiesFile>true</generateGitPropertiesFile>
+                    <generateGitPropertiesFilename>${project.build.outputDirectory}/git.properties
+                    </generateGitPropertiesFilename>
+                </configuration>
+            </plugin>
+            <!--            <plugin>-->
+            <!--                <groupId>com.github.spotbugs</groupId>-->
+            <!--                <artifactId>spotbugs-maven-plugin</artifactId>-->
+            <!--                <version>4.8.3.0</version>-->
+            <!--                <configuration>-->
+            <!--                    <maxAllowedViolations>0</maxAllowedViolations>-->
+            <!--                    <effort>Max</effort>-->
+            <!--                    <xmlOutput>true</xmlOutput>-->
+            <!--                    <xmlOutputDirectory>${project.build.directory}/spotbugs</xmlOutputDirectory>-->
+            <!--                    <threshold>Low</threshold>-->
+            <!--                </configuration>-->
+            <!--                <executions>-->
+            <!--                    <execution>-->
+            <!--                        <id>analyze-code</id>-->
+            <!--                        <goals>-->
+            <!--                            <goal>check</goal>-->
+            <!--                        </goals>-->
+            <!--                        <phase>verify</phase>-->
+            <!--                    </execution>-->
+            <!--                </executions>-->
+            <!--            </plugin>-->
+            <!--            <plugin>-->
+            <!--                <groupId>io.github.git-commit-id</groupId>-->
+            <!--                <artifactId>git-commit-id-maven-plugin</artifactId>-->
+            <!--                <version>5.0.0</version>-->
+            <!--                <executions>-->
+            <!--                    <execution>-->
+            <!--                        <id>get-the-git-infos</id>-->
+            <!--                        <goals>-->
+            <!--                            <goal>revision</goal>-->
+            <!--                        </goals>-->
+            <!--                        <phase>initialize</phase>-->
+            <!--                    </execution>-->
+            <!--                </executions>-->
+            <!--                <configuration>-->
+            <!--                    <injectAllReactorProjects>true</injectAllReactorProjects>-->
+            <!--                    <generateGitPropertiesFile>true</generateGitPropertiesFile>-->
+            <!--                    <generateGitPropertiesFilename>${project.build.outputDirectory}/git.properties-->
+            <!--                    </generateGitPropertiesFilename>-->
+            <!--                </configuration>-->
+            <!--            </plugin>-->
         </plugins>
     </build>
 </project>
